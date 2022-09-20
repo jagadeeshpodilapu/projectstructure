@@ -1,0 +1,21 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+mixin BaseContextHelpers {
+  Size getSize(BuildContext context) {
+    return MediaQuery.of(context).size;
+  }
+
+  Widget addHorizontal(double width) {
+    return SizedBox(width: width);
+  }
+
+  Widget addVertical(double height) {
+    return SizedBox(height: height);
+  }
+
+  // ignore: non_constant_identifier_names
+  Widget HLine() {
+    return const Divider();
+  }
+}

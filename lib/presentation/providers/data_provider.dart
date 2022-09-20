@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:project_struct/di/get_it.dart';
 import 'package:project_struct/domain/usecases/get_user_data.dart';
 

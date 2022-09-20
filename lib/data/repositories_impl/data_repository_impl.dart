@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:project_struct/data/models/users_model.dart';
 import 'package:project_struct/domain/entities/app_error.dart';
@@ -17,9 +16,7 @@ class DataRepositoryImpl extends DataRepository {
     try {
       final response = await remoteDataSource.getTrending();
       return Right(response);
-    } on SocketException {
-      return const Left(AppError(AppErrorType.network));
-    } on Exception {
+    }  on Exception {
       return const Left(AppError(AppErrorType.api));
     }
   }

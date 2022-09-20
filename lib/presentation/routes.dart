@@ -5,7 +5,7 @@ import '../common/constants/route_constants.dart';
 
 class Routes {
   static Map<String, WidgetBuilder> getRoutes(RouteSettings setting) => {
-         RouteList.initial: (context) => const HomePage(),
+         RouteList.initial: (context) =>  HomePage(),
         // RouteList.home: (context) => HomeScreen(),
         // RouteList.movieDetail: (context) => MovieDetailScreen(
         //       movieDetailArguments: setting.arguments as MovieDetailArguments,

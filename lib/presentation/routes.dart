@@ -1,19 +1,27 @@
-import 'package:flutter/material.dart';
-import 'package:project_struct/presentation/views/homepage/home_page.dart';
-import 'package:project_struct/presentation/views/homepage/list_view_data.dart';
 
-import '../common/constants/route_constants.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import 'views/movies/movies.dart';
 
 class Routes {
-  static Map<String, WidgetBuilder> getRoutes(RouteSettings setting) => {
-         RouteList.initial: (context) =>  HomeScreen(),
-        // RouteList.home: (context) => HomeScreen(),
-        // RouteList.movieDetail: (context) => MovieDetailScreen(
-        //       movieDetailArguments: setting.arguments as MovieDetailArguments,
-        //     ),
-        // RouteList.watchTrailer: (context) => WatchVideoScreen(
-        //       watchVideoArguments: setting.arguments as WatchVideoArguments,
-        //     ),
-        // RouteList.favorite: (context) => FavoriteScreen(),
-      };
+ static GoRouter router = GoRouter(
+    routes: <GoRoute>[
+      GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) =>
+            const MovieList(),
+      ),
+      GoRoute(
+        path: '/:id',
+        builder: (context, state) {
+          // use state.params to get router parameter values
+          //final family = Families.family(state.params['fid']!);
+          final id = state.params['id'];
+
+          return MovieDetails(id: id.toString());
+        },
+      ),
+    ],
+  );
 }

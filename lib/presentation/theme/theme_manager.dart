@@ -5,7 +5,7 @@ class AppThemeData {
   static const _lightFillColor = Colors.black;
   static const _darkFillColor = Colors.white;
 
-  static final Color _lightFocusColor = Colors.black.withOpacity(0.12);
+  static final Color _lightFocusColor = Colors.black;
   static final Color _darkFocusColor = Colors.white.withOpacity(0.12);
 
   static ThemeData lightThemeData =
@@ -38,7 +38,7 @@ class AppThemeData {
   }
 
   static const ColorScheme lightColorScheme = ColorScheme(
-    primary: Color(0xFFB93C5D),
+    primary: Colors.blue,
     primaryContainer: Color(0xFF117378),
     secondary: Color(0xFFEFF3F3),
     secondaryContainer: Color(0xFFFAFBFB),

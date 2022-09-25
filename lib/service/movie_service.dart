@@ -4,29 +4,23 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 // service helper for loading json file
 import 'package:flutter/services.dart' as rootBundle;
+import 'package:project_struct/core/api_client.dart';
 
 class MovieService {
-  late final Dio _dio = Dio(
-    BaseOptions(
-      baseUrl: 'https://62d29214afb0b03fc5a80930.mockapi.io',
-      connectTimeout: 5000,
-      receiveTimeout: 3000,
-      responseType: ResponseType.json,
-    ),
-  );
+  final ApiClient _dio = ApiClient();
 
   Future<List<dynamic>> fetchMovies([filter = ""]) async {
     // Load json data
     final moviesData = await _dio.get('/movies?Title=$filter');
     // Decode json data to list
-    return moviesData.data;
+    return moviesData;
   }
 
   Future<dynamic> fetchMovie(id) async {
     // Load json data
     final moviesData = await _dio.get('/movies/$id');
     // Decode json data to list
-    return moviesData.data;
+    return moviesData;
   }
 
   Future<dynamic> updateMovie(id, movieData) async {
@@ -34,9 +28,9 @@ class MovieService {
     try {
       final response = await _dio.put(
         '/movies/$id',
-        data: movieData,
+        params: movieData,
       );
-      return response.data;
+      return response;
     } on DioError catch (err) {
       throw err;
     } catch (e) {
@@ -47,7 +41,7 @@ class MovieService {
   Future<dynamic> deleteMovie(id) async {
     // Load json data
     try {
-      final response = await _dio.delete('/movies/$id');
+      final response = await _dio.deleteWithBody('/movies/$id');
       return response.data;
     } on DioError catch (err) {
       throw err;

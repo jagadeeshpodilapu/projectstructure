@@ -43,11 +43,11 @@ class NavigationDrawer extends StatelessWidget {
               title: TranslationConstants.favoriteMovies.t(context),
               onPressed: () {},
             ),
-            NavigationExpandedListItem(
-              title: TranslationConstants.language.t(context),
-              children: Languages.languages.map((e) => e.value).toList(),
-              onPressed: (index) => _onLanguageSelected(index, context),
-            ),
+            // NavigationExpandedListItem(
+            //   title: TranslationConstants.language.t(context),
+            //   children: Languages.languages.map((e) => e.value).toList(),
+            //   onPressed: (index) => _onLanguageSelected(index, context),
+            // ),
             NavigationListItem(
               title: TranslationConstants.feedback.t(context),
               onPressed: () {

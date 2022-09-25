@@ -1,7 +1,7 @@
 // Creating state notifier provider
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../data/models/movie_model.dart';
+import '../../models/movie_model.dart';
 import '../../service/movie_service.dart';
 
 class MovieState {
@@ -56,18 +56,18 @@ class MovieNotifier extends StateNotifier<MovieState> {
     state = state.copyWith(movies: movies, isLoading: false);
   }
 
-  updateMovie(id, movieData) async {
-    //state = state.copyWith(isLoading: true);
-    final movieJson = await MovieService().updateMovie(id, movieData);
-    // Convert list to list of movies using the movie class constructor
-    final movie = Movie.fromJson(movieJson);
+  // updateMovie(id, movieData) async {
+  //   //state = state.copyWith(isLoading: true);
+  //   final movieJson = await MovieService().updateMovie(id, movieData);
+  //   // Convert list to list of movies using the movie class constructor
+  //   final movie = Movie.fromJson(movieJson);
 
-    final index = state.movies?.indexWhere((element) => element.id == movie.id);
-    final movies = List<Movie>.from(state.movies!);
-    movies[index??0] = movie;
-    // Update state in provider
-    state = state.copyWith(movies: movies, isLoading: false);
-  }
+  //   final index = state.movies?.indexWhere((element) => element.id == movie.id);
+  //   final movies = List<Movie>.from(state.movies!);
+  //   movies[index??0] = movie;
+  //   // Update state in provider
+  //   state = state.copyWith(movies: movies, isLoading: false);
+  // }
 
   deleteMovie(id) async {
     //state = state.copyWith(isLoading: true);

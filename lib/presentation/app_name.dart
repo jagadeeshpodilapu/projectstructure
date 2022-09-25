@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:project_struct/presentation/providers/state_notifiers/state_notifiers.dart';
 import 'package:project_struct/presentation/routes.dart';
 import 'package:project_struct/presentation/theme/theme_manager.dart';
+
+import '../providers/state_notifiers/state_notifiers.dart';
 
 class AppName extends ConsumerWidget {
   @override

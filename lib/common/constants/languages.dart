@@ -1,4 +1,5 @@
-import '../../domain/entities/language_entity.dart';
+
+import '../../models/entities/languages_entity.dart';
 
 class Languages {
   const Languages._();

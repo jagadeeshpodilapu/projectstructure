@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../data/models/movie_model.dart';
-import '../../providers/state_notifiers/movie_state_notifier.dart';
+import '../../../models/movie_model.dart';
+import '../../../providers/state_notifiers/movie_state_notifier.dart';
+
 
 class MovieCard extends ConsumerWidget {
   const MovieCard({Key? key, required this.movie}) : super(key: key);
@@ -191,7 +192,7 @@ class _StatefulBottomSheetState extends ConsumerState<StatefulBottomSheet> {
                         const SnackBar(content: Text('Processing Data')),
                       ); */
 
-                      ref.read(moviesProvider.notifier).updateMovie(movie.id, movie.toJson());
+                    //  ref.read(moviesProvider.notifier).updateMovie(movie.id, movie.toJson());
                     }
                   },
                   child: const Text('Save Changes'),

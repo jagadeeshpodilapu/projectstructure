@@ -1,63 +1,82 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
-import 'package:project_struct/data/core/api_constants.dart';
+import 'package:dio/dio.dart';
 
+import 'api_constants.dart';
 import 'unauthorized_exception.dart';
 
 class ApiClient {
-  final Client _client;
-
-  ApiClient(this._client);
+  late final Dio _client = Dio(
+    BaseOptions(
+      baseUrl: 'https://62d29214afb0b03fc5a80930.mockapi.io',
+      connectTimeout: 5000,
+      receiveTimeout: 3000,
+      responseType: ResponseType.json,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    ),
+  );
 
   dynamic get(String path, {Map<dynamic, dynamic>? params}) async {
     await Future.delayed(const Duration(milliseconds: 500));
     final response = await _client.get(
-      getPath(path, params),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      path,
     );
 
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return response.data;
     } else {
-      throw Exception(response.reasonPhrase);
+      throw Exception(response.statusMessage);
     }
   }
 
   dynamic post(String path, {Map<dynamic, dynamic>? params}) async {
     final response = await _client.post(
-      getPath(path, null),
-      body: jsonEncode(params),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      path,
+      data: jsonEncode(params),
+      
     );
 
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return response.data;
     } else if (response.statusCode == 401) {
       throw UnauthorisedException();
     } else {
-      throw Exception(response.reasonPhrase);
+      throw Exception(response.statusMessage);
     }
   }
 
   dynamic deleteWithBody(String path, {Map<dynamic, dynamic>? params}) async {
-    Request request = Request('DELETE', getPath(path, null));
-    request.headers['Content-Type'] = 'application/json';
-    request.body = jsonEncode(params);
-    final response = await _client.send(request).then(
-          (value) => Response.fromStream(value),
-        );
+    final response = await _client.delete(
+      path,
+      data: jsonEncode(params),
+      
+    );
 
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return response.data;
     } else if (response.statusCode == 401) {
       throw UnauthorisedException();
     } else {
-      throw Exception(response.reasonPhrase);
+      throw Exception(response.statusCode);
+    }
+  }
+
+  
+  dynamic put(String path, {Map<dynamic, dynamic>? params}) async {
+    final response = await _client.put(
+      path,
+      data: jsonEncode(params),
+      
+    );
+
+    if (response.statusCode == 200) {
+      return response.data;
+    } else if (response.statusCode == 401) {
+      throw UnauthorisedException();
+    } else {
+      throw Exception(response.statusCode);
     }
   }
 
@@ -73,5 +92,3 @@ class ApiClient {
         '${ApiConstants.BASE_URL}$path?api_key=${ApiConstants.API_KEY}$paramsString');
   }
 }
-
-
